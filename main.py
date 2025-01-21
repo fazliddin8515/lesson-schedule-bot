@@ -53,7 +53,7 @@ async def schedule_handler(message: Message):
     select_lessons_query = '''
     SELECT lesson_name FROM lessons WHERE day_name = ? ORDER BY lesson_order;
     '''
-    days = ["monday", "teusday", "wednesday", "thursday", "friday", "saturday"]
+    days = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday"]
     schedule = ""
 
     for day in days:
