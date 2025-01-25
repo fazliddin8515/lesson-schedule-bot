@@ -2,4 +2,4 @@ venv/
 __pycache__
 
 .env
-database.sqlite
+databese.sqlite

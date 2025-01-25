@@ -4,13 +4,17 @@ CREATE TABLE IF NOT EXISTS lessons (
     lesson_name VARCHAR NOT NULL,
     day_name VARCHAR NOT NULL,
     lesson_order INTEGER NOT NULL
-)
+);
 '''
 
 insert_lessons_query = '''
-INSERT INTO lessons (lesson_name, day_name, lesson_order) VALUES (?, ?, ?)
+INSERT INTO lessons (lesson_name, day_name, lesson_order) VALUES (?, ?, ?);
 '''
 
 select_lessons_query = '''
 SELECT lesson_name FROM lessons WHERE day_name = ? ORDER BY lesson_order;
+'''
+
+delete_lessons_query = '''
+DELETE FROM lessons WHERE day_name = ?;
 '''
