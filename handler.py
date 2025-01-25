@@ -1,5 +1,5 @@
 from aiogram.types import Message
-from sqlite import cursor, connection
+from my_mysql import cursor, connection
 from queries import insert_lessons_query, select_lessons_query, delete_lessons_query
 
 async def start_handler(message: Message):
