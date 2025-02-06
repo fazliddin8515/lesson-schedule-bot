@@ -1,22 +1,21 @@
 import os
-import mysql.connector
 from dotenv import load_dotenv
-from queries import create_lessons_table_query
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
 load_dotenv()
 
-DB_HOST = os.getenv("DB_HOST")
+
 DB_USER = os.getenv("DB_USER")
 DB_PASS = os.getenv("DB_PASS")
+DB_HOST = os.getenv("DB_HOST")
+DB_PORT = os.getenv("DB_PORT")
 DB_NAME = os.getenv("DB_NAME")
 
-connection = mysql.connector.connect(
-    user = DB_USER, 
-    password = DB_PASS, 
-    host = DB_HOST, 
-    database = DB_NAME
-)
+# driver://user:password@host:port/db
 
-cursor = connection.cursor()
+DB_URL = f"mysql+pymysql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 
-cursor.execute(create_lessons_table_query)
+engine = create_engine(DB_URL)
+
+Session = sessionmaker(engine)
