@@ -3,11 +3,13 @@ from bot import bot
 from dispatcher import dp
 from models import Base
 from my_mysql import engine
+from bot import set_commands, commands
 
 Base.metadata.create_all(engine)
 
 
-def on_start():
+async def on_start():
+    await set_commands(commands)
     print("bot has been started....")
 
 
