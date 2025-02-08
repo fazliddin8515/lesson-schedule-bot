@@ -25,6 +25,7 @@ async def edit_lessons_handler(message: Message):
         session.execute(insert_stmt)
 
     session.commit()
+    session.close()
     await message.answer(f"{lessons} darslar {day_name} kuniga qo'shildi.")
 
 
@@ -42,5 +43,6 @@ async def schedule_handler(message: Message):
         for i, lesson in enumerate(lessons):
             day_lessons += f"{i + 1}. {lesson.lesson_name} \n"
         schedule += day_lessons + "\n"
+        session.close()
 
     await message.answer(schedule)
