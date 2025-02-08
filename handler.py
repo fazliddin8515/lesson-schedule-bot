@@ -34,12 +34,13 @@ async def schedule_handler(message: Message):
 
     for day in days:
         day_lessons = f"{day}: \n"
-        # cursor.execute(select_lessons_query, (day,))
-        select_stmt = select(Lesson).where(day_name=day)
-        # fetched_lessons = cursor.fetchall()
-        # for i, lesson in enumerate(fetched_lessons):
-        #     day_lessons += f"{i + 1}. {lesson[0]} \n"
-        # schedule += day_lessons + "\n"
+        session = Session()
+        select_stmt = select(Lesson).where(Lesson.day_name == day)
+        result = session.execute(select_stmt)
+        lessons = result.scalars().all()
 
-    # await message.answer(schedule)
-    pass
+        for i, lesson in enumerate(lessons):
+            day_lessons += f"{i + 1}. {lesson.lesson_name} \n"
+        schedule += day_lessons + "\n"
+
+    await message.answer(schedule)
